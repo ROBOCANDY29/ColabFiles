@@ -90,13 +90,9 @@ def create_graph():
 
 
 def load_graph():
-    uploaded = files.upload()
-    for filename in uploaded.keys():
-        if filename.endswith('.graphml'):
-            G = nx.read_graphml(filename)
-            print(f"Graph loaded from {filename}")
-            return G
-        else:
-            print(f"File {filename} is not a GraphML file. Skipping.")
-            load_graph()
-            return None
+    #     uploaded = files.upload()
+    #     for filename in uploaded.keys():
+    #         if filename.endswith('.graphml'):
+    G = nx.read_graphml("similarity_graph.graphml")
+    print("Graph loaded from similarity_graph.graphml")
+    return G
