@@ -8,15 +8,12 @@ import time
 from tensorflow.keras.models import load_model
 
 # Load the model
-# global model
+global model
 
 
 def load_model_from_file():
-    uploaded = files.upload()
-    filename = next(iter(uploaded.keys()))
-    # time.sleep(1)  # Wait for the file to be fully uploaded
-    print(f"Loading model from {filename}...")
-    model = load_model(filename)
+    global model
+    model = load_model("model.keras")
     # Display the model's summary to confirm it's loaded correctly
     model.summary()
     return model
@@ -30,9 +27,10 @@ def pad_grid(grid, target_shape):
     return padded
 
 
-def prepare_single_set_for_prediction(iop1_in, iop1_out, iop2_in, iop2_out,model):
+def prepare_single_set_for_prediction(iop1_in, iop1_out, iop2_in, iop2_out):
     # Use fixed target shape matching model input (here 30, 30)
     # Change 30 to your model's expected H, W if different
+    global model
     target_shape = (30, 30)
     p_iop1_in = pad_grid(iop1_in, target_shape)
     p_iop1_out = pad_grid(iop1_out, target_shape)
